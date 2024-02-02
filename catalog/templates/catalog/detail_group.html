@@ -1,0 +1,21 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Разделы и тесты</h1>
+  
+  {% for section in sections %}
+    <h2>{{ section.name }}</h2>
+    
+    {% with tests=tests_by_section.section %}
+      {% if tests %}
+        <ul>
+          {% for test in tests %}
+            <li>{{ test.title }}</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>В этом разделе нет тестов.</p>
+      {% endif %}
+    {% endwith %}
+  {% endfor %}
+{% endblock %}

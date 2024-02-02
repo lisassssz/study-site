@@ -1,0 +1,7 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Результаты теста: {{ test.title }}</h1>
+  <p>Вы набрали {{ score }} баллов из 10.</p>
+  <a href="{% url 'index' %}">На главную</a>
+{% endblock %}

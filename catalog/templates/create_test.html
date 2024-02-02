@@ -1,0 +1,100 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <section class="create-test">
+    <div class="container">
+      <div class="create-test-title">
+        <h1 class="general-design">Создать новый тест</h1>
+      </div>
+      <form method="post" class="create-test-form">
+        {% csrf_token %}
+        <div class="general-form-part">
+          {{ create_test_form.as_p }}
+        </div>
+        <div id="question-answer-fields">
+          {{ question_form.as_p }}
+        </div>
+        <button type="button" id="add-question-btn" class="btn btn-info new-question-btn">Добавить вопрос</button></br>
+        <button type="submit" class="btn btn-primary">Создать тест</button>
+        
+      </form>
+    </div>
+  </section>
+  <script>
+    // document.addEventListener('DOMContentLoaded', function() {
+    //   const addQuestionBtn = document.getElementById('add-question-btn');
+    //   const questionAnswerFields = document.getElementById('question-answer-fields');
+      
+    //   addQuestionBtn.addEventListener('click', function() {
+    //     const newQuestionField = document.createElement('input');
+    //     newQuestionField.type = 'text';
+    //     newQuestionField.name = 'questions';
+    //     newQuestionField.placeholder = 'Вопрос';
+    //     newQuestionField.classList.add('question-field');
+        
+    //     const newAnswerField = document.createElement('input');
+    //     newAnswerField.type = 'text';
+    //     newAnswerField.name = 'answers';
+    //     newAnswerField.placeholder = 'Ответ';
+    //     newAnswerField.classList.add('answer-field');
+  
+    //     questionAnswerFields.appendChild(newQuestionField);
+    //     questionAnswerFields.appendChild(newAnswerField);
+    //   });
+    // });
+    document.addEventListener('DOMContentLoaded', function() {
+      const addQuestionBtn = document.getElementById('add-question-btn');
+      const questionAnswerFields = document.getElementById('question-answer-fields');
+      
+      addQuestionBtn.addEventListener('click', function() {
+        // Создаем элемент для вопроса
+        const questionDiv = document.createElement('div');
+        questionDiv.classList.add('question-field');
+
+        const questionLabel = document.createElement('label');
+        questionLabel.textContent = 'Вопрос:';
+        
+        const newQuestionField = document.createElement('input');
+        newQuestionField.type = 'text';
+        newQuestionField.name = 'questions';
+        newQuestionField.placeholder = '';
+        
+        questionDiv.appendChild(questionLabel);
+        questionDiv.appendChild(newQuestionField);
+
+        // Создаем элемент для ответа
+        const answerDiv = document.createElement('div');
+        answerDiv.classList.add('answer-field');
+
+        const answerLabel = document.createElement('label');
+        answerLabel.textContent = 'Ответ:';
+        
+        const newAnswerField = document.createElement('input');
+        newAnswerField.type = 'text';
+        newAnswerField.name = 'answers';
+        newAnswerField.placeholder = '';
+        
+        answerDiv.appendChild(answerLabel);
+        answerDiv.appendChild(newAnswerField);
+
+        // Создаем кнопку удаления
+        const removeBtn = document.createElement('button');
+        removeBtn.textContent = 'Удалить';
+        removeBtn.type = 'button';
+        removeBtn.classList.add('btn');
+        removeBtn.classList.add('btn-danger');
+        removeBtn.classList.add('remove-question-btn');
+        removeBtn.addEventListener('click', function() {
+          // Удаляем родительские элементы (вопрос и ответ)
+          questionDiv.remove();
+          answerDiv.remove();
+          removeBtn.remove(); // Удаляем кнопку "Удалить"
+        });
+        // Добавляем элементы в question-answer-fields
+        questionAnswerFields.appendChild(questionDiv);
+        questionAnswerFields.appendChild(answerDiv);
+        questionAnswerFields.appendChild(removeBtn);
+      });
+    });
+  </script>
+{% endblock %}

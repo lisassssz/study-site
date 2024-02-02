@@ -1,0 +1,27 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <section class="lection-creation">
+    <div class="container">
+
+      <div class="bread-crumbs">
+        <a href="{% url 'index' %}">Главная</a> &raquo;
+        <a href="{% url 'subjects' %}">Предметы</a> &raquo;
+        <a href="{% url 'section_list' current_subject.id %}">{{ current_subject.name }}</a> &raquo;
+        <a href="{% url 'section-detail' section.id %}">{{ section.name }}</a> &raquo;
+        <span class="current-page">Работа с лекцией</span> 
+      </div>
+
+      <div class="lection-operation-title">
+        <h1 class="general-design">Работа с лекцией</h1>
+      </div>
+      <form action="" method="post" enctype="multipart/form-data" class="lection-form">
+        {% csrf_token %}
+        <table>
+        {{ form.as_table }}
+        </table>
+        <input type="submit" value="Добавить лекцию" class="btn btn-outline-primary add-lection-btn" />
+      </form>
+    </div>
+  </section>
+{% endblock %}

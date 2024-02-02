@@ -1,0 +1,26 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <section class="test-delete">
+    <div class="container">
+
+      <div class="bread-crumbs">
+        <a href="{% url 'index' %}">Главная</a> &raquo;
+        <a href="{% url 'subjects' %}">Предметы</a> &raquo;
+        <a href="{% url 'section_list' current_subject.id %}">{{ current_subject.name }}</a> &raquo;
+        <a href="{% url 'section-detail' section.id %}">{{ section.name }}</a> &raquo;
+        <span class="current-page">Удаление теста</span> 
+      </div>
+
+      <div class="test-delete-title">
+        <h1 class="general-design">Удаление теста</h1>
+      </div>
+      <p>Вы уверены что хотите удалить тест: {{ test }}?</p>
+
+      <form action="" method="POST">
+        {% csrf_token %}
+        <input class="btn btn-outline-danger" type="submit" value="Да, удалить." />
+      </form>
+    </div>
+  </section>
+{% endblock %}

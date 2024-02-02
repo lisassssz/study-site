@@ -1,0 +1,30 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<section class="edit-test">
+  <div class="container">
+    <div class="edit-test-title">
+      <h1 class="general-design">Редактировать тест</h1>
+    </div>
+    <form method="post" class="edit-test-form">
+      {% csrf_token %}
+      {{ edit_test_form.as_p }}
+      
+      <!-- <h3>Редактировать вопросы и ответы</h3> -->
+      <div id="questions-answers">
+        {% for question in test.questions.all %}
+          <div class="question">
+            <label for="questions">Вопрос:</label>
+            <input type="text" name="questions" value="{{ question.question_text }}"></br>
+            <label for="answers">Ответ:</label>
+            <input type="text" name="answers" value="{{ question.answers.first.answer_text }}">
+          </div>
+        {% endfor %}
+      </div>
+      
+      <!-- {{ question_form.as_p }} -->
+      <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+    </form>
+  </div>
+  </section>
+{% endblock %}

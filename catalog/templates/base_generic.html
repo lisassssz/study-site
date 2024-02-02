@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% block title %}<title>ДОБРО ПОЖАЛОВАТЬ В ...SMARTY!</title>{% endblock %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- скрипт для свежего бустрапа -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Добавление дополнительного статического CSS файла -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/media.css' %}" />
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="container">
+        <div class="header-nav">
+          <nav id="nav" class="nav">
+            <input id="menu__toggle" type="checkbox" />
+            <label class="menu__btn" for="menu__toggle">
+              <span></span>
+            </label>        
+            <ul class="nav-list">
+              <li class="nav-item"><a href="#!" class="nav-link help">i</a></li>
+              <li class="nav-item"><a href="{% url 'index' %}" class="nav-link">Главная</a></li>
+              <li class="nav-item"><a href="https://mrk-bsuir.by/ru/explore/all/" class="nav-link">Новости</a></li>
+              <!-- <li class="nav-item"><a href="#!" class="nav-link login">Войти</a></li> -->
+              {% if user.is_authenticated %}
+                  <li class="nav-item"><a href="{% url 'subjects' %}" class="nav-link">Предметы</a></li>
+                  <li class="nav-item person">{{ user.get_username }}</li>              
+                  <li class="nav-item"><a href="{% url 'logout'%}?next={{request.path}}" class="nav-link login">Выйти</a></li>
+                {% else %}
+                  <li class="nav-item"><a href="{% url 'login'%}?next={{request.path}}" class="nav-link login">Войти</a></li>
+                {% endif %}
+            </ul>
+          </nav>
+          <a href="#!" class="logo"><img class="logo-img" src="{% static 'img/header-img.png' %}"></a>
+        </div>
+      </div>
+    </header>
+    
+    <div class="content">{% block content %}{% endblock %}</div>
+    <footer class="rights">
+      <div class="footer-content">
+        <p>Copyright</p>
+      </div>
+    </footer>
+    <!-- скрипт для бустрапа -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script>
+
+      const titles = document.querySelectorAll('.accordion__title');
+      const contents = document.querySelectorAll('.accordion__content');
+
+      titles.forEach(item => item.addEventListener('click', () => {
+        const activeContent = document.querySelector('#' + item.dataset.tab);
+
+        if (activeContent.classList.contains('active')) {
+            activeContent.classList.remove('active');
+            item.classList.remove('active');
+            activeContent.style.maxHeight = 0;
+        } else {
+            // contents.forEach(element => {
+            //     element.classList.remove('active');
+            //     element.style.maxHeight = 0;
+            // });
+
+            // titles.forEach(element => element.classList.remove('active'));
+
+            item.classList.add('active');
+            activeContent.classList.add('active');
+            activeContent.style.maxHeight = activeContent.scrollHeight + 'px';
+        }
+      }))
+
+      document.querySelector('[data-tab="tab-1"]').classList.add('active');
+      document.querySelector('#tab-1').classList.add('active');
+      document.querySelector('#tab-1').style.maxHeight = document.querySelector('#tab-1').scrollHeight + 'px';
+    </script>
+  </body>
+</html>

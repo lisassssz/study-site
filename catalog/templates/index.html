@@ -1,0 +1,150 @@
+{% extends "base_generic.html" %}
+{% load static %}
+{% block content %}
+  <section class="welcome">
+    <div class="container">
+      <div class="welcome-row">
+        <div class="welcome-title">
+          <h1>Добро пожаловать в ...SMARTY</h1>
+        </div>
+        <div class="welcome-img">
+          <img src="{% static 'img/header-img.png' %}">
+        </div>
+      </div>
+      <a href="{% url 'login'%}?next={{request.path}}" class="nav-link wide-login">Войти</a>
+    </div>
+  </section>
+
+  <section class="cards">
+    <div class="container">
+      <div class="cards-row">
+        <div class="card">
+            <div class="card-number">
+              <p>1</p>
+            </div>
+            <div class="card-content">
+            <p>Входи в <br>систему</p>
+            </div>
+        </div>
+        <div class="card">
+          <div class="card-number">
+            <p>2</p>
+          </div>
+          <div class="card-content">
+          <p>Изучай <br>материал</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-number">
+            <p>3</p>
+          </div>
+          <div class="card-content">
+            <p>Проверяй <br>знания</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <section class="info">
+    <div class="container">
+      <div class="info-title">
+        <h2>Не только учащимся</h2>
+      </div>
+
+      <div class="info-content">
+        <div class="info-item">
+          <div class="info-num"><p>1</p></div>
+          <div class="info-str"><p>Подтвердите статус преподавателя</p></div>
+        </div>
+        <div class="info-item">
+          <div class="info-num"><p>2</p></div>
+          <div class="info-str"><p>Добавляйте лекции и видеоуроки</p></div>
+        </div>
+        <div class="info-item">
+          <div class="info-num"><p>3</p></div>
+          <div class="info-str"><p>Создавайте тесты</p></div>
+        </div>
+        <div class="info-item">
+          <div class="info-num"><p>4</p></div>
+          <div class="info-str"><p>Следите за результатами</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="statistic">
+    <div class="container">
+      <div class="statistic-title">
+        <h2>Статистика</h2>
+      </div>
+      <div class="statistic-cards">
+        <div class="statistic-card-1">
+          <img class="statistic-card-img-1" src="{% static 'img/teacher.png' %}">
+          <div class="statistic-card-title">
+            <p>Преподавателей 10</p>
+          </div>
+        </div>
+        <div class="statistic-card-2">
+          <img class="statistic-card-img-2" src="{% static 'img/student.png' %}">
+          <div class="statistic-card-title">
+            <p>Учащихся {{ num_students }}</p>
+          </div>
+        </div>
+        <div class="statistic-card-3">
+          <img class="statistic-card-img-3" src="{% static 'img/subject.png' %}">
+          <div class="statistic-card-title">
+            <p>Предметов {{ num_subjects }}</p>
+          </div>
+        </div>
+      </div>
+
+      <button id="get-btn" class="get-teachers">Получить всех преподавателей</button>
+      <ul class="teachers-list" id="list"></ul>
+    </div>
+  </section>
+  <script>
+    const list = document.querySelector('#list');
+    // async function start() {
+    //   list.innerHTML = 'Loading...';
+    //   try {
+    //     const resp = await fetch('https://jsonplaceholder.typicode.com/users');
+    //     const data = await resp.json();
+    //     setTimeout(()=>{
+    //       render(data);
+    //     }, 2000)
+    //   } catch (err) {
+    //     list.style.color = 'red';
+    //     list.innerHTML = err.message;
+    //   }
+    // }
+    async function start() {
+      list.innerHTML = 'Loading...';
+      try {
+        const resp = await axios.get('https://jsonplaceholder.typicode.com/users');
+        setTimeout(()=>{
+          return render(resp.data);
+        }, 2000)
+      } catch (err) {
+        list.style.color = 'red';
+        list.innerHTML = err.message;
+      }
+    }
+
+    function render(users=[]) {
+      const html = users.map(toHTML).join('')
+      list.innerHTML = html
+    }
+    
+    function toHTML(user) {
+      return `
+        <li>${user.name}</li>
+      `
+    }
+
+    const button = document.querySelector('#get-btn');
+    button.addEventListener('click', start);
+
+  </script>
+
+{% endblock %}

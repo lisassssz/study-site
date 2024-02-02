@@ -1,0 +1,27 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<section class="concrete-test">
+  <div class="container">
+    <div class="concrete-test-title">
+      <h1>Прохождение теста: {{ test.title }}</h1>
+    </div>
+    <form method="post">
+      {% csrf_token %}
+      <ol>
+        {% for question in questions %}
+          <li class="question">
+            <div class="question-text">
+              <p>{{ question.question_text }}</p>
+            </div>
+            <div class="test-answer">
+              <input type="text" name="{{ question.id }}" placeholder="Введите ответ">
+            </div>
+          </li>
+        {% endfor %}
+      </ol>
+      <button type="submit" class="end-test">Завершить тест</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

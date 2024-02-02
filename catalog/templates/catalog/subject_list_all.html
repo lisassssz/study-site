@@ -1,0 +1,97 @@
+{% extends "base_generic.html" %}
+{% load static %}
+{% block content %}
+
+  <section class="subjects">
+    <div class="container">
+      <div class="bread-crumbs">
+        <a href="{% url 'index' %}">Главная</a> &raquo;
+        <span class="current-page">Предметы</span>
+      </div>
+
+      <div class="subjects-title">
+        <h1 class="general-design">Предметы</h1>
+      </div>
+      <input type="text" class="subject-filter" placeholder="Название предмета" id="filter" />
+      <!-- <h1>subject_list_all</h1> -->
+      {% if subject_list %}
+      <ul class="subjects-list">
+      {% for subject in subject_list %}
+        <li class="subject">
+          <div class="subject-image">
+            {% if subject.image %}
+              <img class="subject-concrete-image" src="{{ subject.image.url }}">
+            {% else %}
+              <!-- По умолчанию, если у предмета нет изображения -->
+              <img class="subject-concrete-image" src="{% static 'img/default.png' %}">
+            {% endif %}
+          </div>
+          <div class="subject-title">
+            <a href="{% url 'section_list' subject.id %}">{{ subject.name }}</a>
+          </div> 
+        </li>
+      {% endfor %}
+        <div id="no-match-message" style="display: none;">Нет таких предметов.</div>
+      </ul>
+      {% else %}
+        <p>Пока нет предметов.</p>
+      {% endif %}
+
+      <!-- {% block pagination %}
+        {% if is_paginated %}
+          <div class="pagination">
+              {% for i in paginator.page_range %}
+                {% if i == page_obj.number %}
+                  <div class="page-current">
+                    <p>{{ i }}</p>
+                  </div>
+                {% else %}
+                  <div class="page-next">
+                    <a href="{{ request.path }}?page={{ i }}">{{ i }}</a>
+                  </div>
+                {% endif %}
+              {% endfor %}
+          </div>
+        {% endif %}
+      {% endblock %} -->
+    </div>
+  </section>
+
+  <script>
+    const filter = document.querySelector('#filter');
+    let SUBJECTS = document.querySelectorAll('.subject');
+    const noMatchMessage = document.getElementById('no-match-message');
+  
+
+    filter.addEventListener('input', (event) => {
+      const value = event.target.value.toLowerCase();
+      noMatchMessage.style.display = 'none';
+
+      if (value.length >= 2) {
+        let hasMatches = false;
+        SUBJECTS.forEach((subject) => {
+        const subjectTitle = subject.querySelector('.subject-title a').textContent.toLowerCase();
+        const isMatch = subjectTitle.includes(value);
+        if (isMatch) {
+          subject.style.display = 'flex';  
+          hasMatches = true;
+        } else {
+          subject.style.display = 'none'; 
+        }
+        });
+
+        if (!hasMatches) {
+          noMatchMessage.style.display = 'block';
+        }
+      }
+      else {
+        SUBJECTS.forEach((subject) => {
+          subject.style.display = 'flex';
+        });
+        noMatchMessage.style.display = 'none';
+      } 
+ 
+    });
+    
+  </script>
+{% endblock %}

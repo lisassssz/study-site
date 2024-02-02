@@ -1,0 +1,21 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<section class="tests-results">
+  <div class="container">
+    <div class="tests-results-title">
+      <h1 class="general-design">Результаты теста {{ cur_test }}</h1>
+    </div>
+    {% if taken_tests %}
+    <ol>
+      {% for taken_test in taken_tests %}
+        <!-- <li>{{ taken_test.test.section.subject.name }} - {{ taken_test.test.section }} - {{ taken_test.test }} - {{ taken_test }}</li> -->
+        <li>{{ taken_test }}</li>
+      {% endfor %}
+    </ol>
+    {% else %}
+      <p>Пока никто не прошел данный тест.</p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

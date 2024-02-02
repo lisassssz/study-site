@@ -1,0 +1,36 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<section class="concrete-subject">
+  <div class="container">
+    
+    <div class="bread-crumbs">
+      <a href="{% url 'index' %}">Главная</a> &raquo;
+      <a href="{% url 'subjects' %}">Предметы</a> &raquo;
+      {% if current_subject %}
+          <span class="current-page">{{ current_subject.name }}</span> 
+      {% endif %}
+    </div>
+
+    <div class="concrete-subject-title">
+      <h1 class="general-design">{{ current_subject.name }}</h1>
+    </div>
+
+    {% if sections %}
+    <ul class="sections-list">
+      {% for section in sections %}
+        <li class="section">
+            <a href="{% url 'section-detail' section.id %}">{{ section.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+          <p>Пока нет разделов.</p>
+        {% endif %}
+    {% if perms.catalog.can__section %}
+    <a href="{% url 'section-create' pk=current_subject.id %}" class="btn btn-primary">Добавить раздел</a>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}

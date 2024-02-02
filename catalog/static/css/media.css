@@ -1,0 +1,412 @@
+@media (max-width: 834px) {
+    .container {
+        width: 700px;
+    }
+
+    .nav {
+        justify-content: center;
+    }
+
+    .nav-list {
+        width: 700px;
+        gap: 35px;
+    }
+
+    .welcome-title {
+        font-size: 65px;
+    }
+
+    .card {
+        width: 330px;
+        height: 237.058px;
+    }
+
+    .cards-row {
+        row-gap: 60px; 
+        width: 700px;
+        height: 599px;
+    }
+
+    .card-number {
+        left: 115px;
+        top: -40px;
+      } 
+
+    .card-content {
+        width: 265.833px;
+        height: 191.117px;
+    } 
+
+    .statistic-card-img-1 {
+        width: 181.69px;
+        height: 150px;
+    }
+
+    .statistic-card-img-2 {
+        width: 127.817px;
+        height: 150px;
+    }
+
+    .statistic-card-img-3 {
+        width: 183.566px;
+        height: 150px;
+    }
+
+    .statistic-card-1 {
+        padding-right: 25px;
+    }
+      
+    .statistic-card-2 {
+        padding: 0px 25px;
+    }
+      
+    .statistic-card-3 {
+        padding-left: 25px;
+    }
+
+    /* subjects */
+    .subjects-list {
+        width: 698px;
+        gap: 70px 20px;
+    }
+
+    .subject {
+        width: 700px;
+        height: 300px;
+    }
+
+    /* authorization */
+}
+
+@media (max-width: 360px) {
+    .container {
+        width: 300px;
+    }
+
+    .header-nav {
+        justify-content: center;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .nav-button {
+        display: block;
+    }
+    
+    .logo {
+        display: block;
+    }
+
+    .logo-img {
+        width: 65px;
+        height: 57px;
+    }
+
+    .welcome-img {
+        display: none;
+    }
+
+    .welcome-title {
+        font-size: 48px;
+        text-align: center;
+    }
+
+    .welcome-row {
+        padding-top: 180px;
+        margin-bottom: 160px;
+    }
+
+    .nav-link.wide-login {
+        display: flex;
+        width: 300px;
+        height: 52px;
+        padding: 10px 30px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        border: 3px solid #F4F5F5;
+        background: #051F34;
+        color: #F4F5F5;
+        font-weight: 700;
+        border-radius: 15px;
+    }
+
+    .cards-row {
+        gap: 70px;
+        display: flex;
+        width: 300px;
+        height: 817px;
+    }
+
+    .card {
+        width: 296px;
+        height: 211.929px;
+    }
+
+    .card-number {
+        width: 80px;
+        height: 80px;
+        left: 110px;
+        top: -30px;
+        font-size: 30px;
+    } 
+
+    .card-content {
+        width: 238.444px;
+        height: 170.857px;
+        font-size: 25px;
+    } 
+
+    .info-title {
+        font-size: 27px;
+        margin-left: 0;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .info-content {
+        padding: 20px 20px;
+        gap: 30px;
+        border-radius: 35px;
+        border: 5px solid #051F34; 
+      }
+      
+    .info-item {
+        gap: 15px;
+    }
+      
+    .info-num {
+        display: flex;
+        width: 50px;
+        height: 50px;
+        gap: 10px;
+        border-radius: 50px;
+        border: 4px solid #FFF; 
+        font-size: 22px;
+        padding: 10px 20px;
+    }
+      
+    .info-str {
+        font-size: 17px;
+    }
+
+    .statistic-title {
+        margin-bottom: 100px;
+        font-size: 40px;
+    }
+
+    .statistic-cards {
+        flex-direction: column;
+        gap: 60px;
+    }
+
+    .statistic-card-1, .statistic-card-2, .statistic-card-3 {
+        gap: 15px;
+        border: none;
+        padding: 0;
+    }  
+
+    .statistic {
+        margin-bottom: 100px;
+    }
+
+    /* стилизуем кнопку */
+    .menu__btn {
+        display: flex;
+        align-items: center;
+        position: fixed;
+        top: 43px;
+        left: 30px;
+        width: 35px;
+        height: 35px;
+        cursor: pointer;
+        z-index: 10;
+    }
+   
+    /* добавляем "гамбургер" */
+    .menu__btn > span,
+    .menu__btn > span::before,
+    .menu__btn > span::after {
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 3px;
+        background-color: #051F34;
+        border-radius: 10px;
+    }
+    .menu__btn > span::before {
+        content: '';
+        top: -8px;
+    }
+    .menu__btn > span::after {
+        content: '';
+        top: 8px;
+    }
+
+    /* контейнер меню */
+    .nav-list {
+        display: block;
+        position: fixed;
+        visibility: hidden;
+        top: 0;
+        left: -100%;
+        width: 300px;
+        height: 100%;
+        margin: 0;
+        padding: 140px 0;
+        text-align: start;
+        background-color: #F4F5F5;
+        box-shadow: 1px 0px 6px rgba(0, 0, 0, .2);
+    }
+    
+    /* элементы меню */
+    .nav-item {
+        display: block;
+        padding: 12px 24px;
+        font-size: 20px;
+        font-weight: 600;
+    }
+    
+    .nav-item:hover {
+        background-color: #BAD6DB;
+    }
+
+    #menu__toggle:checked ~ .menu__btn > span {
+        transform: rotate(45deg);
+    }
+    
+    #menu__toggle:checked ~ .menu__btn > span::before {
+        top: 0;
+        transform: rotate(0);
+    }
+    
+    #menu__toggle:checked ~ .menu__btn > span::after {
+        top: 0;
+        transform: rotate(90deg);
+    }
+   
+    #menu__toggle:checked ~ .nav-list {
+        visibility: visible;
+        left: 0;
+        z-index: 1;
+    }
+
+    /* subjects */
+    .subjects {
+        margin-bottom: 100px;
+    }
+
+    .subjects-title {
+        font-size: 40px;
+    }
+
+    .subjects-list {
+        width: 300px;
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .subject {
+        width: 306px;
+        height: 270px;
+        padding: 0px 20px;
+        flex-direction: column;
+        gap: 20px;
+        border-radius: 30px;
+    }
+    
+    .subject-title {
+        text-align: center;
+    }
+    .subject-title a {
+        font-size: 20px;
+    }
+
+    /* authorization */
+    .login-page {
+        margin-bottom: 100px;
+    }
+
+    .login-title {
+        margin-bottom: 20px;
+    }
+
+    .login-form {
+        width: 300px;
+        height: 333px;
+        gap: 25px;
+        border-radius: 30px;
+        border: 4px solid var(--lightgray, #F4F5F5);
+
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        gap: 10px;
+    }
+
+    .login-label {
+        font-size: 20px;
+    }
+
+    .login-input {
+        width: 236px;
+        height: 50px;
+        border-radius: 30px;
+        border: 4px solid var(--lightgray, #F4F5F5);
+    }
+
+    .login-button {
+        display: flex;
+        width: 135px;
+        height: 53px;
+        border: 4px solid var(--lightgray, #F4F5F5);
+
+
+        font-size: 20px;
+    }
+
+    .lost-password {
+        width: 205px;
+        height: 44px;
+        padding: 10px 20px;
+    }
+
+    /* subject and it's sections*/
+    .general-design {
+        font-size: 29px;
+    }
+
+    /* .concrete-subject-title {
+        font-size: 29px;
+    } */
+
+    .sections-list {
+        display: flex;
+        width: 300px;
+        padding-left: 25px;
+        gap: 30px;
+        border-left: 4px solid var(--darkblue, #051F34);
+    }
+
+    .section {
+        width: 275px;
+        border: 4px solid var(--turquoise, #01A9C1);
+    }
+      
+    .section a {
+        font-size: 17px;
+    }
+
+    .accordion__content a {
+        font-size: 17px;
+    }
+
+    .test-str {
+        gap: 20px;
+    }
+
+    .test-button.pass-test {
+        padding: 10px 10px;
+    }
+}

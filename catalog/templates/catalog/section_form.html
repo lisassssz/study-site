@@ -1,0 +1,29 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<section class="section-creation">
+  <div class="container">
+
+    <div class="bread-crumbs">
+      <a href="{% url 'index' %}">Главная</a> &raquo;
+      <a href="{% url 'subjects' %}">Предметы</a> &raquo;
+      <a href="{% url 'section_list' current_subject_id %}">{{ current_subject.name }}</a> &raquo;
+      {% if section %}
+      <a href="{% url 'section-detail' section.id %}">{{ section.name }}</a> 
+      {% endif %}
+      <span class="current-page">Работа с разделом</span> 
+    </div>
+
+    <div class="section-operation-title">
+      <h1 class="general-design">Работа с разделом</h1>
+    </div>
+    <form action="" method="post" class="section-form">
+        {% csrf_token %}
+        <table>
+        {{ form.as_table }}
+        </table>
+        <input class="btn btn-outline-primary add-section-btn" type="submit" value="Добавить раздел" />
+    </form>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,106 @@
+{% extends "base_generic.html" %}
+{% load static %}
+{% block content %}
+
+  <section class="concrete-section">
+    <div class="container">
+
+      <div class="bread-crumbs">
+        <a href="{% url 'index' %}">Главная</a> &raquo;
+        <a href="{% url 'subjects' %}">Предметы</a> &raquo;
+        <a href="{% url 'section_list' subject.id %}">{{ subject.name }}</a> &raquo;
+        {% if section %}
+            <span class="current-page">{{ section.name }}</span> 
+        {% endif %}
+      </div>
+
+      <div class="concrete-section-title">
+        <div class="section-subject">
+          <h1 class="general-design">{{ section.name }}</h1>
+        </div>
+        {% if perms.catalog.can__section %}
+        <a href="{% url 'section-update' pk=section.pk %}" class="btn btn-warning">Изменить раздел</a>
+        <a href="{% url 'section-delete' pk=section.pk %}" class="btn btn-danger">Удалить раздел</a>
+        {% endif %}
+      </div>
+      
+      <div class="parent">
+        <div class="accordion">
+          <div data-tab="tab-1" class="accordion__title head">
+            <h3>Лекции</h3>
+            <img src="{% static 'img/open-section.png' %}">
+          </div>
+          <div id="tab-1" class="accordion__content">
+
+            {% for lection in lections %}
+              <div class="lection-str">
+                <a href="{{ lection.file.url }}">{{ lection.title }}</a> 
+                {% if perms.catalog.can_lection %}
+                <a href="{% url 'lection-update' pk=lection.pk %}" class="btn btn-warning">Изменить лекцию</a>
+                <a href="{% url 'lection-delete' pk=lection.pk %}" class="btn btn-danger">Удалить лекцию</a>
+                {% endif %}
+              </div>
+            {% endfor %}
+
+            {% if perms.catalog.can__section %}
+            <a href="{% url 'lection-create' pk=current_subject.id %}" class="btn btn-primary">Добавить лекцию</a>
+            {% endif %}
+          </div>
+        </div>
+        <div class="accordion">
+          <div data-tab="tab-2" class="accordion__title">
+            <h3>Видеоуроки</h3>
+            <img src="{% static 'img/open-section.png' %}">
+          </div>
+          <div id="tab-2" class="accordion__content">
+              {% for video in videos %}
+                <div class="video-str">
+                  <a href="{{ video.reference }}" target="_blank">{{ video.title }}</a> 
+                  {% if perms.catalog.can_video %}
+                  <a href="{% url 'video-update' pk=video.pk %}" class="btn btn-warning">Изменить видеоурок</a>
+                  <a href="{% url 'video-delete' pk=video.pk %}" class="btn btn-danger">Удалить видеоурок</a>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            
+            {% if perms.catalog.can_video %}
+            <a href="{% url 'video-create' %}" class="btn btn-primary">Добавить видеоурок</a>
+            {% endif %}
+          </div>
+        </div>
+        <div class="accordion">
+          <div data-tab="tab-3" class="accordion__title">
+            <h3>Тесты</h3>
+            <img src="{% static 'img/open-section.png' %}">
+          </div>
+          <div id="tab-3" class="accordion__content">
+            {% for test in tests %}
+
+            <div class="test-str">
+              <div class="test-title">
+                <a href="">{{ test}}</a>
+              </div>
+              <div class="test-button {% if perms.catalog.can_pass %}pass-test{% endif %} {% if perms.catalog.can_test %}no-styles{% endif %}">
+                {% if perms.catalog.can_pass %}
+                <a href="{% url 'pass_test' test.id %}" class="pass-test">Пройти тест</a>
+                {% endif %}
+                {% if perms.catalog.can_test %}
+                <a href="{% url 'edit_test' test.id %}" class="btn btn-warning">Изменить тест</a>
+                <a href="{% url 'test-delete' pk=test.pk %}" class="btn btn-danger">Удалить тест</a>
+                {% endif %}
+                {% if perms.catalog.can_watch %}
+                  - <a href="{% url 'groups' test.id %}">Оценки</a>
+                {% endif %}
+                </br>
+              </div>
+            </div>
+            {% endfor %}
+            {% if perms.catalog.can_test %}
+              <a href="{% url 'create_test' subject.id %}" class="btn btn-primary">Создать тест</a>
+            {% endif %}
+          </div>
+        </div>
+    </div>
+    </div>
+  </section>
+{% endblock %}
